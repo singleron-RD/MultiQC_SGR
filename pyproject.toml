@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multiqc_sgr"
-version = "0.0.1"
+version = "1.21.0"
 dependencies = [
     "click",
     "coloredlogs",
@@ -58,11 +58,7 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://multiqc.info"
-Repository = "https://github.com/MultiQC/MultiQC"
-Issues = "https://github.com/MultiQC/MultiQC/issues"
-Documentation = "https://multiqc.info/docs"
-Changelog = "https://github.com/MultiQC/MultiQC/blob/main/CHANGELOG.md"
+Repository = "https://github.com/zhouyiqi91/MultiQC_SGR"
 
 [project.entry-points.console_scripts]
 multiqc = "multiqc.__main__:run_multiqc"
