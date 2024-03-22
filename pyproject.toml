@@ -3,8 +3,8 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "multiqc"
-version = "1.22dev"
+name = "multiqc_sgr"
+version = "1.22.post0"
 dependencies = [
     "click",
     "coloredlogs",
