@@ -52,7 +52,7 @@ def main():
             entries_by_section[section].append((message, pr_link))
     run_cmd(f"cd {WORKSPACE_PATH} && git checkout main")
 
-    dev_version = importlib_metadata.version("multiqc")  # 1.22.dev0
+    dev_version = importlib_metadata.version("multiqc_sgr")  # 1.22.dev0
     new_version = dev_version.removesuffix(".dev0")
     print(f"## [MultiQC v{new_version}]({REPO_URL}/releases/tag/v{new_version}) - {datetime.date.today().isoformat()}")
     print("")
