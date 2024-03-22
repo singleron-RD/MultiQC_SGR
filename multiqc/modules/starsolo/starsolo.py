@@ -31,6 +31,9 @@ class MultiqcModule(BaseMultiqcModule):
             info="for scRNA-Seq",
             doi="10.1093/bioinformatics/bts635",
         )
+        # Superfluous function call to confirm that it is used in this module
+        # Replace None with actual version if it is available
+        self.add_software_version(None)
 
         # Find and load any STAR reports
         self.starsolo_data = dict()
