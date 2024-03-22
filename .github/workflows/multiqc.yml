@@ -2,7 +2,7 @@ name: "MultiQC"
 on:
   push:
     branches:
-      - main
+      - test
     paths-ignore:
       - "docs/**"
       - "*.md"
