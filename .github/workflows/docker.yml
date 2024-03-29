@@ -1,8 +1,5 @@
-name: Publish Docker image
-
+name: Build and Push Image
 on:
-  push:
-    branches: [main]
   release:
     types: [published]
 
@@ -12,55 +9,27 @@ jobs:
     name: Build + Push Docker image
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # https://github.com/docker/setup-qemu-action
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-
-      # https://github.com/docker/setup-buildx-action
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+      - name: Build Image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          image: multiqc_sgr
+          tags: ${{ github.event.release.tag_name }}
+          containerfiles: Dockerfile
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+      # Podman Login action (https://github.com/redhat-actions/podman-login) also be used to log in,
+      # in which case 'username' and 'password' can be omitted.
+      - name: Push To quay.io
+        id: push-to-quay
+        uses: redhat-actions/push-to-registry@v2
         with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: quay.io/singleron-rd
+          username: singleron-rd
+          password: ${{ secrets.QUAY_PASSWORD }}
 
-      - name: Push dev image
-        uses: docker/build-push-action@v3
-        if: github.event_name == 'push'
-        with:
-          # All available with python:3.11-slim are:
-          # platforms: linux/386,linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          # But 32-bit binaries likely require compilation from source so stick with linux/amd64 and linux/arm64 for now
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            multiqc/multiqc:dev
-            ghcr.io/multiqc/multiqc:dev
-
-      - name: Push release image
-        uses: docker/build-push-action@v3
-        if: github.event_name == 'release'
-        with:
-          # All available with python:3.11-slim are:
-          # platforms: linux/386,linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
-          # But 32-bit binaries likely require compilation from source so stick with linux/amd64 and linux/arm64 for now
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            multiqc/multiqc:${{ github.event.release.tag_name }}
-            multiqc/multiqc:latest
-            ghcr.io/multiqc/multiqc:${{ github.event.release.tag_name }}
-            ghcr.io/multiqc/multiqc:latest
+      - name: Print image url
+        run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
