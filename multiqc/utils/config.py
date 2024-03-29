@@ -24,7 +24,7 @@ from multiqc.utils.util_functions import strtobool
 logger = logging.getLogger("multiqc")
 
 # Get the MultiQC version
-version = importlib_metadata.version("multiqc")
+version = importlib_metadata.version("multiqc_sgr")
 short_version = version
 git_hash = None
 git_hash_short = None
