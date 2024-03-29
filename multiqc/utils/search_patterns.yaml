@@ -934,3 +934,7 @@ xenome:
 xengsort:
   contents: "# Xengsort classify"
   num_lines: 2
+starsolo/summary:
+  fn: "*Summary.csv"
+  contents: "GeneFull_Ex50pAS"
+  num_lines: 50

@@ -3,8 +3,8 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "multiqc"
-version = "1.21"
+name = "multiqc_sgr"
+version = "0.0.1"
 dependencies = [
     "click",
     "coloredlogs",
@@ -213,6 +213,7 @@ verifybamid = "multiqc.modules.verifybamid:MultiqcModule"
 whatshap = "multiqc.modules.whatshap:MultiqcModule"
 xenome = "multiqc.modules.xenome:MultiqcModule"
 xengsort = "multiqc.modules.xengsort:MultiqcModule"
+starsolo = "multiqc.modules.starsolo:MultiqcModule"
 
 [project.entry-points."multiqc.templates.v1"]
 default = "multiqc.templates.default"
