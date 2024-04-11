@@ -62,6 +62,10 @@ class MultiqcModule(BaseMultiqcModule):
         # Basic Stats Table
         self.general_stats_table()
 
+        # Superfluous function call to confirm that it is used in this module
+        # Replace None with actual version if it is available
+        self.add_software_version(None)
+
     def parse_starsolo_report(self, f):
         parsed_data = {}
         reader = csv.reader(f)

@@ -35,3 +35,11 @@ repos:
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
+
+  - repo: local
+    hooks:
+      - id: code_checks
+        name: code_checks
+        entry: python .github/workflows/code_checks.py
+        language: system
+        pass_filenames: false
