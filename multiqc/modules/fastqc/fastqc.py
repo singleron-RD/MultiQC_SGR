@@ -335,7 +335,11 @@ class MultiqcModule(BaseMultiqcModule):
                 "shared_key": "read_count",
             },
         }
-        self.general_stats_addcols(data, headers)
+        self.add_section(
+            name="FastQC general stats",
+            anchor="fastqc_general_stats",
+            plot=table.plot(data, headers),
+        )
 
     def read_count_plot(self):
         """Stacked bar plot showing counts of reads"""
