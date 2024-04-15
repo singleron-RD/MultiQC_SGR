@@ -210,6 +210,9 @@ whatshap = "multiqc.modules.whatshap:MultiqcModule"
 xenome = "multiqc.modules.xenome:MultiqcModule"
 xengsort = "multiqc.modules.xengsort:MultiqcModule"
 starsolo = "multiqc.modules.starsolo:MultiqcModule"
+ontplot = "multiqc.modules.ontplot:MultiqcModule"
+plbcrank = "multiqc.modules.plbcrank:MultiqcModule"
+ontstat = "multiqc.modules.ontstat:MultiqcModule"
 
 [project.entry-points."multiqc.templates.v1"]
 default = "multiqc.templates.default"

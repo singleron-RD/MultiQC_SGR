@@ -938,3 +938,13 @@ starsolo/summary:
   fn: "*Summary.csv"
   contents: "GeneFull_Ex50pAS"
   num_lines: 50
+ontplot/plot: 
+  fn: "*Summary.csv"
+  contents: "forward reads"
+  shared: true
+plbcrank:
+  fn: "*bcrank.csv"
+  contents: "UMI"
+ontstat:
+  fn: "*.csv"
+  contents: "Estimated"
