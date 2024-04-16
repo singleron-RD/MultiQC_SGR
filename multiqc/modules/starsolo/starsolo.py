@@ -5,7 +5,7 @@ import logging
 import json
 
 from multiqc.modules.base_module import BaseMultiqcModule, ModuleNoSamplesFound
-from multiqc.plots import bargraph
+from multiqc.plots import bargraph, linegraph
 
 
 # Initialise the logger
@@ -35,14 +35,19 @@ class MultiqcModule(BaseMultiqcModule):
         # Find and load any STAR reports
         summary_data = self.parse_log("summary")
         read_stats_data = self.parse_log("read_stats")
-        if len(summary_data) == 0 and len(read_stats_data) == 0:
+        umi_count_data = self.parse_log("umi_count")
+        if len(summary_data) == 0 and len(read_stats_data) == 0 and len(umi_count_data) == 0:
             raise ModuleNoSamplesFound
 
         # Basic Stats Table
         self.general_stats_table(summary_data)
-        # plot
+        # assgin plot
         self.add_section(
-            name="Read Counts Assigned to Features", anchor="starsolo_assign", plot=self.assign_chart(read_stats_data)
+            name="Read Counts Assigned to Features", anchor="starsolo_assign", plot=self.assign_plot(read_stats_data)
+        )
+        # barcode rank plot
+        self.add_section(
+            name="Barcode Rank", anchor="starsolo_barcode_rank", plot=self.barcode_rank_plot(umi_count_data)
         )
 
         # Superfluous function call to confirm that it is used in this module
@@ -116,7 +121,7 @@ class MultiqcModule(BaseMultiqcModule):
         }
         self.general_stats_addcols(summary_data, headers=headers)
 
-    def assign_chart(self, read_stats_data):
+    def assign_plot(self, read_stats_data):
         """Make the plot showing alignment rates"""
 
         # Specify the order of the different possible categories
@@ -136,3 +141,36 @@ class MultiqcModule(BaseMultiqcModule):
         }
 
         return bargraph.plot(read_stats_data, keys, pconfig)
+
+    def barcode_rank_plot(self, umi_count_data):
+        plot_data = {}
+        colors = {}
+        for sample in umi_count_data:
+            for sub in umi_count_data[sample]:
+                cur = umi_count_data[sample][sub]
+                if not cur:
+                    continue
+                new = {}
+                for k, v in cur.items():
+                    new[int(k)] = v
+                plot_data[sub] = new
+                if "pure" in sub:
+                    colors[sub] = "darkblue"
+                elif "mix" in sub:
+                    colors[sub] = "lightblue"
+                elif "background" in sub:
+                    colors[sub] = "lightgray"
+
+        # Config for the plot
+        pconfig = {
+            "id": "starsolo_barcode_rank_plot",
+            "title": "STARSolo: Barcode Rank",
+            "ylab": "UMI counts",
+            "xlab": "Barcode Rank",
+            "yLog": True,
+            "xLog": True,
+            "colors": colors,
+            "ymin": 0,
+        }
+
+        return linegraph.plot(plot_data, pconfig)

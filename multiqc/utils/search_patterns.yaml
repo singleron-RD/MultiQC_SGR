@@ -940,3 +940,5 @@ starsolo/summary:
   num_lines: 50
 starsolo/read_stats:
   fn: "*.read_stats.json"
+starsolo/umi_count:
+  fn: "*.umi_count.json"

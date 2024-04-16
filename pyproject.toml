@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multiqc_sgr"
-version = "1.21.1"
+version = "1.21.2"
 dependencies = [
     "click",
     "coloredlogs",
