@@ -12,12 +12,11 @@ from multiqc.plots import bargraph, linegraph
 log = logging.getLogger(__name__)
 
 
-def get_frac(x) -> str:
-    x = round(float(x) * 100, 2)
-    return str(x)
+def get_frac(x):
+    return round(float(x) * 100, 2)
 
 
-def get_int(x) -> str:
+def get_int(x):
     return str(int(x))
 
 
@@ -77,10 +76,12 @@ class MultiqcModule(BaseMultiqcModule):
             "Reads With Valid Barcodes": {
                 "title": "% Valid Barcodes",
                 "description": "Fraction of reads with valid barcodes matching whitelist",
-                "format": get_frac,
                 "max": 100,
                 "min": 0,
                 "suffix": "%",
+                "scale": "PuRd",
+                "modify": get_frac,
+                "format": "{:,.2f}",
             },
             "Estimated Number of Cells": {
                 "title": "N Cells",
@@ -90,10 +91,12 @@ class MultiqcModule(BaseMultiqcModule):
             "Fraction of Unique Reads in Cells": {
                 "title": "% Reads in Cells",
                 "description": "Fraction of unique reads in cells",
-                "format": get_frac,
                 "max": 100,
                 "min": 0,
                 "suffix": "%",
+                "scale": "YlGn",
+                "modify": get_frac,
+                "format": "{:,.2f}",
             },
             "Median GeneFull_Ex50pAS per Cell": {
                 "title": "Median Genes",
@@ -113,10 +116,12 @@ class MultiqcModule(BaseMultiqcModule):
             "Sequencing Saturation": {
                 "title": "Saturation",
                 "description": "Sequencing Saturation",
-                "format": get_frac,
                 "max": 100,
                 "min": 0,
                 "suffix": "%",
+                "scale": "PuRd",
+                "modify": get_frac,
+                "format": "{:,.2f}",
             },
         }
         self.general_stats_addcols(summary_data, headers=headers)
