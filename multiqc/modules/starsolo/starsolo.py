@@ -26,9 +26,9 @@ class MultiqcModule(BaseMultiqcModule):
         super(MultiqcModule, self).__init__(
             name="STARSolo",
             anchor="starsolo",
-            href="https://github.com/alexdobin/STAR",
-            info="for scRNA-Seq",
-            doi="10.1093/bioinformatics/bts635",
+            href="https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md",
+            info="mapping, demultiplexing and quantification for single cell RNA-seq",
+            doi="10.1101/2021.05.05.442755",
         )
 
         # Find and load any STAR reports
@@ -79,7 +79,7 @@ class MultiqcModule(BaseMultiqcModule):
                 "max": 100,
                 "min": 0,
                 "suffix": "%",
-                "scale": "PuRd",
+                "scale": "green",
                 "modify": get_frac,
                 "format": "{:,.2f}",
             },
@@ -94,7 +94,7 @@ class MultiqcModule(BaseMultiqcModule):
                 "max": 100,
                 "min": 0,
                 "suffix": "%",
-                "scale": "YlGn",
+                "scale": "green",
                 "modify": get_frac,
                 "format": "{:,.2f}",
             },
@@ -119,7 +119,7 @@ class MultiqcModule(BaseMultiqcModule):
                 "max": 100,
                 "min": 0,
                 "suffix": "%",
-                "scale": "PuRd",
+                "scale": "green",
                 "modify": get_frac,
                 "format": "{:,.2f}",
             },
