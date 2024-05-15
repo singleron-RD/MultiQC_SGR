@@ -37,7 +37,7 @@ class MultiqcModule(BaseMultiqcModule):
         umi_count_data = self.parse_log("umi_count")
         saturation_data = self.parse_log("saturation")
         median_gene_data = self.parse_log("median_gene")
-        if all(len(x)==0 for x in [summary_data, read_stats_data, umi_count_data, saturation_data, median_gene_data]):
+        if all(len(x) == 0 for x in [summary_data, read_stats_data, umi_count_data, saturation_data, median_gene_data]):
             raise ModuleNoSamplesFound
 
         # Basic Stats Table
@@ -53,9 +53,7 @@ class MultiqcModule(BaseMultiqcModule):
 
         # subsample
         if saturation_data:
-            self.add_section(
-                name="Saturation", anchor="starsolo_subsample", plot=self.saturation_plot(saturation_data)
-            )
+            self.add_section(name="Saturation", anchor="starsolo_subsample", plot=self.saturation_plot(saturation_data))
         if median_gene_data:
             self.add_section(
                 name="Median Gene", anchor="starsolo_median_gene", plot=self.median_gene_plot(median_gene_data)
@@ -191,9 +189,8 @@ class MultiqcModule(BaseMultiqcModule):
         }
 
         return linegraph.plot(plot_data, pconfig)
-    
-    def saturation_plot(self, saturation_data):
 
+    def saturation_plot(self, saturation_data):
         # Config for the plot
         pconfig = {
             "id": "starsolo_saturation_plot",
@@ -203,9 +200,8 @@ class MultiqcModule(BaseMultiqcModule):
         }
 
         return linegraph.plot(saturation_data, pconfig)
-    
-    def median_gene_plot(self, median_gene_data):
 
+    def median_gene_plot(self, median_gene_data):
         # Config for the plot
         pconfig = {
             "id": "starsolo_median_gene_plot",
