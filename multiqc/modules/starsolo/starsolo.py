@@ -35,7 +35,9 @@ class MultiqcModule(BaseMultiqcModule):
         summary_data = self.parse_log("summary")
         read_stats_data = self.parse_log("read_stats")
         umi_count_data = self.parse_log("umi_count")
-        if len(summary_data) == 0 and len(read_stats_data) == 0 and len(umi_count_data) == 0:
+        saturation_data = self.parse_log("saturation")
+        median_gene_data = self.parse_log("median_gene")
+        if all(len(x)==0 for x in [summary_data, read_stats_data, umi_count_data, saturation_data, median_gene_data]):
             raise ModuleNoSamplesFound
 
         # Basic Stats Table
@@ -48,6 +50,16 @@ class MultiqcModule(BaseMultiqcModule):
         self.add_section(
             name="Barcode Rank", anchor="starsolo_barcode_rank", plot=self.barcode_rank_plot(umi_count_data)
         )
+
+        # subsample
+        if saturation_data:
+            self.add_section(
+                name="Saturation", anchor="starsolo_subsample", plot=self.saturation_plot(saturation_data)
+            )
+        if median_gene_data:
+            self.add_section(
+                name="Median Gene", anchor="starsolo_median_gene", plot=self.median_gene_plot(median_gene_data)
+            )
 
         # Superfluous function call to confirm that it is used in this module
         # Replace None with actual version if it is available
@@ -179,3 +191,26 @@ class MultiqcModule(BaseMultiqcModule):
         }
 
         return linegraph.plot(plot_data, pconfig)
+    
+    def saturation_plot(self, saturation_data):
+
+        # Config for the plot
+        pconfig = {
+            "id": "starsolo_saturation_plot",
+            "title": "STARSolo: Saturation",
+            "ylab": "Saturation",
+            "xlab": "Fraction of Reads",
+        }
+
+        return linegraph.plot(saturation_data, pconfig)
+    
+    def median_gene_plot(self, median_gene_data):
+
+        # Config for the plot
+        pconfig = {
+            "id": "starsolo_median_gene_plot",
+            "title": "STARSolo: Median Gene",
+            "ylab": "Median Gene",
+            "xlab": "Fraction of Reads",
+        }
+        return linegraph.plot(median_gene_data, pconfig)

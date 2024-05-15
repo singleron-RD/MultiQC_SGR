@@ -942,3 +942,7 @@ starsolo/read_stats:
   fn: "*.read_stats.json"
 starsolo/umi_count:
   fn: "*.umi_count.json"
+starsolo/saturation:
+  fn: "*.saturation.json"
+starsolo/median_gene:
+  fn: "*.median_gene.json"
