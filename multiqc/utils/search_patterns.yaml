@@ -938,6 +938,31 @@ starsolo/summary:
   fn: "*.summary.json"
   contents: "GeneFull_Ex50pAS"
   num_lines: 50
+ontplot/plot: 
+  fn: "*Summary.csv"
+  contents: "forward reads"
+  shared: true
+plbcrank:
+  fn: "*bcrank.csv"
+  contents: "UMI"
+ontstat:
+  fn: "*.csv"
+  contents: "Estimated"
+sctag_tplot:
+  fn: "*_html.tsv"
+  contents: "tsne_cluster"
+sctag_stat_table/bc:
+  fn: "*_stat.tsv"
+  contents: "Valid Reads"
+sctag_stat_table/cutadapt:
+  fn: "*_stat.tsv"
+  contents: "Reads with Adapters"
+sctag_stat_plot/map:
+  fn: "*_stat.tsv"
+  contents: "Reads Mapped"
+sctag_stat_plot/count:
+  fn: "*_stat.tsv"
+  contents: "Undetermined Cells"
 starsolo/read_stats:
   fn: "*.read_stats.json"
 starsolo/umi_count:

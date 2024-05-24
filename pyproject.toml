@@ -210,6 +210,12 @@ whatshap = "multiqc.modules.whatshap:MultiqcModule"
 xenome = "multiqc.modules.xenome:MultiqcModule"
 xengsort = "multiqc.modules.xengsort:MultiqcModule"
 starsolo = "multiqc.modules.starsolo:MultiqcModule"
+ontplot = "multiqc.modules.ontplot:MultiqcModule"
+plbcrank = "multiqc.modules.plbcrank:MultiqcModule"
+ontstat = "multiqc.modules.ontstat:MultiqcModule"
+sctag_tplot = "multiqc.modules.sctag_tplot:MultiqcModule"
+sctag_stat_plot = "multiqc.modules.sctag_stat_plot:MultiqcModule"
+sctag_stat_table = "multiqc.modules.sctag_stat_table:MultiqcModule"
 
 [project.entry-points."multiqc.templates.v1"]
 default = "multiqc.templates.default"
