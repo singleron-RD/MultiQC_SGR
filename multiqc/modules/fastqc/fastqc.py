@@ -147,7 +147,7 @@ class MultiqcModule(BaseMultiqcModule):
         # Make the sample name from the input filename if we find it
         fn_search = re.search(r"Filename\s+(.+)", file_contents)
         if fn_search:
-            s_name = self.clean_s_name(fn_search.group(1), f)
+            s_name = fn_search.group(1)
 
         if s_name in self.fastqc_data.keys():
             log.debug(f"Duplicate sample name found! Overwriting: {s_name}")
@@ -335,7 +335,11 @@ class MultiqcModule(BaseMultiqcModule):
                 "shared_key": "read_count",
             },
         }
-        self.general_stats_addcols(data, headers)
+        self.add_section(
+            name="FastQC general stats",
+            anchor="fastqc_general_stats",
+            plot=table.plot(data, headers),
+        )
 
     def read_count_plot(self):
         """Stacked bar plot showing counts of reads"""

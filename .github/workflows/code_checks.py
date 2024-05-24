@@ -5,8 +5,6 @@ import glob
 import os
 import sys
 
-from rich import print
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MODULES_DIR = os.path.join(BASE_DIR, "multiqc", "modules")
 num_errors = 0

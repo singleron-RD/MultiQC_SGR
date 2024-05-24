@@ -935,7 +935,7 @@ xengsort:
   contents: "# Xengsort classify"
   num_lines: 2
 starsolo/summary:
-  fn: "*Summary.csv"
+  fn: "*.summary.json"
   contents: "GeneFull_Ex50pAS"
   num_lines: 50
 ontplot/plot: 
@@ -963,3 +963,11 @@ sctag_stat_plot/map:
 sctag_stat_plot/count:
   fn: "*_stat.tsv"
   contents: "Undetermined Cells"
+starsolo/read_stats:
+  fn: "*.read_stats.json"
+starsolo/umi_count:
+  fn: "*.umi_count.json"
+starsolo/saturation:
+  fn: "*.saturation.json"
+starsolo/median_gene:
+  fn: "*.median_gene.json"
