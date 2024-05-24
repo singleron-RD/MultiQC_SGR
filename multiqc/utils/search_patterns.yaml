@@ -948,3 +948,18 @@ plbcrank:
 ontstat:
   fn: "*.csv"
   contents: "Estimated"
+sctag_tplot:
+  fn: "*_html.tsv"
+  contents: "tsne_cluster"
+sctag_stat_table/bc:
+  fn: "*_stat.tsv"
+  contents: "Valid Reads"
+sctag_stat_table/cutadapt:
+  fn: "*_stat.tsv"
+  contents: "Reads with Adapters"
+sctag_stat_plot/map:
+  fn: "*_stat.tsv"
+  contents: "Reads Mapped"
+sctag_stat_plot/count:
+  fn: "*_stat.tsv"
+  contents: "Undetermined Cells"
